@@ -16,6 +16,9 @@ interface ShopDatabaseDao {
     @Delete
     suspend fun deleteStock(stock: Stock)
 
+    @Delete
+    suspend fun deleteItem(item: Item)
+
     @Query("SELECT * FROM item_table ORDER BY id  DESC")
     fun getItems():List<Item>
 
