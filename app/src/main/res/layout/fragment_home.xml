@@ -1,20 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_itemCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nothing in here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.HomeFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/upper_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toTopOf="@+id/lower_layout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Take Stock"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lower_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/primary_blue"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upper_layout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Sell Item"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
