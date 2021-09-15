@@ -1,4 +1,4 @@
-package com.example.myshop.ui
+package com.example.myshop.ui.sellFragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,11 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellBinding
+import com.example.myshop.ui.adapters.SellItemAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SellFragment : Fragment() {
+
+    private val sellViewModel : SellViewModel by viewModels()
+
     private lateinit var binding: FragmentSellBinding
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
@@ -38,6 +49,15 @@ class SellFragment : Fragment() {
             }
             )
         }
+
+       sellViewModel.itemCount.observe(viewLifecycleOwner,{
+           binding.tvItemCount.text= it.toString()
+       })
+
+        sellViewModel.items.observe(viewLifecycleOwner,{
+            val sellAdapter = SellItemAdapter(it)
+            binding.rvSellItems.adapter = sellAdapter
+        })
 
 
         return binding.root

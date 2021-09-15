@@ -13,11 +13,8 @@ class ShopRepository
 
     suspend fun deleteItem(item: Item)=shopDao.deleteItem(item)
 
-    fun getItems()=shopDao.getItems()
+    suspend fun getItems()=shopDao.getItems()
 
-    fun getTotalPriceInDB():Double{
-        val items= getItems()
-        return items.sumOf { it.buyingPrice }
-    }
+
 
 }

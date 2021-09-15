@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:background="@color/primary_blue"
         android:layout_height="match_parent"
-        tools:context=".ui.SellFragment">
+        tools:context=".ui.sellFragment.SellFragment">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_searchBar_layout"
@@ -124,6 +124,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_itemCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="This is the bottom sheet"

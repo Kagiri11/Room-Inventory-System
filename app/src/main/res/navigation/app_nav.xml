@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/sellFragment"
-        android:name="com.example.myshop.ui.SellFragment"
+        android:name="com.example.myshop.ui.sellFragment.SellFragment"
         android:label="fragment_sell"
         tools:layout="@layout/fragment_sell" />
 </navigation>
