@@ -1,9 +1,7 @@
 package com.example.myshop.ui.sellFragment
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.myshop.model.Item
 import com.example.myshop.repository.ShopRepository
 import kotlinx.coroutines.flow.collect
@@ -21,20 +19,29 @@ class SellViewModel
         emit(shopRepository.getItems())
     }
 
-    val itemOne = Item(20,"Item One",3.5, 5.0)
-    val itemTwo = Item(13,"Item two",3.5, 5.0)
+
+
+    val itemOne = Item(20,"Heart cake",6.5, 10.0)
+    val itemTwo = Item(13,"Kiberiti",2.0, 5.0)
+    val itemThree = Item(19,"Fritos",100.0, 155.0)
+
+    private val cartList = mutableListOf(itemThree)
+    val _sellCart2 = MutableLiveData<List<Item>>()
+    val sellCart2 : LiveData<List<Item>> = _sellCart2
 
     init {
         add(itemOne)
         add(itemTwo)
+        add(itemThree)
+    }
+
+    fun addToCart(item: Item){
+        cartList.add(item)
+        _sellCart2.postValue(cartList.toList())
     }
 
     fun add(item: Item)=viewModelScope.launch {
         shopRepository.addItem(item)
     }
-
-
-
-
 
 }
