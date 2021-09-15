@@ -19,13 +19,11 @@ class SellViewModel
         emit(shopRepository.getItems())
     }
 
-
-
     val itemOne = Item(20,"Heart cake",6.5, 10.0)
     val itemTwo = Item(13,"Kiberiti",2.0, 5.0)
     val itemThree = Item(19,"Fritos",100.0, 155.0)
 
-    private val cartList = mutableListOf(itemThree)
+    val cartList = mutableListOf<Item>()
     val _sellCart2 = MutableLiveData<List<Item>>()
     val sellCart2 : LiveData<List<Item>> = _sellCart2
 

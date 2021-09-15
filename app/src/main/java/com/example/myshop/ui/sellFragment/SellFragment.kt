@@ -24,7 +24,7 @@ class SellFragment : Fragment() {
     private val sellAdapter = SellItemAdapter()
     private lateinit var binding: FragmentSellBinding
 
-
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,15 +35,9 @@ class SellFragment : Fragment() {
             addToCart(it)
         }
 
-        handleBottomSheet()
-
-
-
         sellViewModel.sellCart2.observe(viewLifecycleOwner,{ list->
-            binding.tvItemCount.text = list.sumOf { it.sellingPrice }.toString()
-        })
-
-        sellViewModel.itemCount.observe(viewLifecycleOwner, {
+            binding.tvItemCount.text = "${list.sumOf { it.sellingPrice }} /="
+            binding.tvCartCount.text = "${list.count()} items"
 
         })
 
@@ -51,6 +45,8 @@ class SellFragment : Fragment() {
             sellAdapter.differ.submitList(it)
             binding.rvSellItems.adapter = sellAdapter
         })
+
+        handleBottomSheet()
 
         return binding.root
     }
@@ -61,7 +57,7 @@ class SellFragment : Fragment() {
 
     private fun handleBottomSheet() {
         BottomSheetBehavior.from(binding.bottomSheetLayout).apply {
-            peekHeight = 200
+            peekHeight = 150
             this.state = BottomSheetBehavior.STATE_COLLAPSED
             addBottomSheetCallback(object :
                 BottomSheetBehavior.BottomSheetCallback() {
@@ -83,4 +79,5 @@ class SellFragment : Fragment() {
             )
         }
     }
+
 }
