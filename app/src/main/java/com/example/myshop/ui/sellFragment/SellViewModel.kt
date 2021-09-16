@@ -38,8 +38,17 @@ class SellViewModel
         _sellCart2.postValue(cartList.toList())
     }
 
+    fun removeFromCart(item: Item){
+        cartList.remove(item)
+        _sellCart2.postValue(cartList.toList())
+    }
+
     fun add(item: Item)=viewModelScope.launch {
         shopRepository.addItem(item)
+    }
+
+    fun deleteItem(item: Item) = viewModelScope.launch {
+        shopRepository.deleteItem(item)
     }
 
 }

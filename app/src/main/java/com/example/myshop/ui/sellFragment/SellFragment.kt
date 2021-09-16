@@ -13,15 +13,18 @@ import androidx.lifecycle.MutableLiveData
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellBinding
 import com.example.myshop.model.Item
+import com.example.myshop.ui.adapters.CartItemAdapter
 import com.example.myshop.ui.adapters.SellItemAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SellFragment : Fragment() {
 
     private val sellViewModel: SellViewModel by viewModels()
     private val sellAdapter = SellItemAdapter()
+    private val itemAdapter = CartItemAdapter()
     private lateinit var binding: FragmentSellBinding
 
     @SuppressLint("SetTextI18n")
@@ -35,10 +38,17 @@ class SellFragment : Fragment() {
             addToCart(it)
         }
 
+        itemAdapter.setOnItemClickListener {
+            removeFromCart(it)
+        }
+
+
         sellViewModel.sellCart2.observe(viewLifecycleOwner,{ list->
             binding.tvItemCount.text = "${list.sumOf { it.sellingPrice }} /="
             binding.tvCartCount.text = "${list.count()} items"
-
+            itemAdapter.cartList=list.toMutableList()
+            itemAdapter.differ.submitList(list)
+            binding.rvCart.adapter=itemAdapter
         })
 
         sellViewModel.items.observe(viewLifecycleOwner, {
@@ -53,6 +63,10 @@ class SellFragment : Fragment() {
 
     private fun addToCart(item: Item) {
         sellViewModel.addToCart(item)
+    }
+
+    private fun removeFromCart(item: Item) {
+        sellViewModel.removeFromCart(item)
     }
 
     private fun handleBottomSheet() {
