@@ -34,14 +34,11 @@ class SellFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sell, container, false)
 
-        sellAdapter.setOnItemClickListener {
-            addToCart(it)
-        }
+
 
         itemAdapter.setOnItemClickListener {
             removeFromCart(it)
         }
-
 
         sellViewModel.sellCart2.observe(viewLifecycleOwner,{ list->
             binding.tvItemCount.text = "${list.sumOf { it.sellingPrice }} /="
@@ -52,6 +49,9 @@ class SellFragment : Fragment() {
         })
 
         sellViewModel.items.observe(viewLifecycleOwner, {
+            sellAdapter.setOnItemClickListener { ite->
+                addToCart(ite)
+            }
             sellAdapter.differ.submitList(it)
             binding.rvSellItems.adapter = sellAdapter
         })
@@ -63,10 +63,14 @@ class SellFragment : Fragment() {
 
     private fun addToCart(item: Item) {
         sellViewModel.addToCart(item)
+        println(sellViewModel.cartList)
+        println(sellViewModel.goodList2)
     }
 
     private fun removeFromCart(item: Item) {
         sellViewModel.removeFromCart(item)
+        println(sellViewModel.cartList)
+        println(sellViewModel.goodList2)
     }
 
     private fun handleBottomSheet() {

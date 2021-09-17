@@ -9,5 +9,5 @@ data class Item(
     val id:Int,
     val name:String,
     val buyingPrice:Double,
-    val sellingPrice:Double,
+    var sellingPrice:Double,
 )
