@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_homeFragment_to_sellFragment"
             app:destination="@id/sellFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addStockFragment"
+            app:destination="@id/addStockFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellFragment"
-        android:name="com.example.myshop.ui.sellFragment.SellFragment"
+        android:name="com.example.myshop.ui.sell.SellFragment"
         android:label="fragment_sell"
         tools:layout="@layout/fragment_sell" />
+    <fragment
+        android:id="@+id/addStockFragment"
+        android:name="com.example.myshop.ui.stock.AddStockFragment"
+        android:label="AddStockFragment" />
 </navigation>

@@ -1,12 +1,9 @@
-package com.example.myshop.ui.sellFragment
+package com.example.myshop.ui.sell
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.myshop.model.Item
 import com.example.myshop.repository.ShopRepository
-import com.example.myshop.utils.ShoppingCart
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class SellViewModel
@@ -20,20 +17,12 @@ class SellViewModel
         emit(shopRepository.getItems())
     }
 
-    val itemOne = Item(20,"Heart cake",6.5, 10.0)
-    val itemTwo = Item(13,"Kiberiti",2.0, 5.0)
-    val itemThree = Item(19,"Fritos",100.0, 155.0)
-
     val cartList = mutableListOf<Item>()
     var goodList2 = mutableListOf<Item>()
 
     val _sellCart2 = MutableLiveData<List<Item>>()
     val sellCart2 : LiveData<List<Item>> = _sellCart2
-    init {
-        add(itemOne)
-        add(itemTwo)
-        add(itemThree)
-    }
+
 
     fun addToCart(item: Item){
         cartList.add(item)
@@ -60,7 +49,6 @@ class SellViewModel
             if(!cartTwo.contains(item)){
                 cartTwo.add(item)
             }else{
-
                 val secondValue = cartTwo.filter { it.name == item.name }.sumByDouble { it.sellingPrice } + item.sellingPrice
                 val truePair = Item(id = item.id,name = item.name,sellingPrice= secondValue,buyingPrice = item.buyingPrice)
                 cartTwo.remove(item)
@@ -69,8 +57,5 @@ class SellViewModel
         }
         return cartTwo
     }
-
-
-
 
 }

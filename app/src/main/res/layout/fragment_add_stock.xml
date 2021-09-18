@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.stock.AddStockFragment">
+
+        <TextView
+            android:id="@+id/tv_stock_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="60dp"
+            android:text="Item name"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
+            app:layout_constraintEnd_toStartOf="@+id/et_stock_name"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_stock_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="Name of item"
+            android:textSize="20sp"
+            android:inputType="text"
+            android:fontFamily="@font/montserrat"
+            app:layout_constraintBottom_toBottomOf="@id/tv_stock_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_stock_name"
+            app:layout_constraintTop_toTopOf="@id/tv_stock_name" />
+
+        <TextView
+            android:id="@+id/tv_stock_buying_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="Buying price:"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_stock_name"
+            app:layout_constraintStart_toStartOf="@id/tv_stock_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_stock_name" />
+
+        <EditText
+            android:id="@+id/et_stock_buying_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="Buying Price"
+            android:inputType="numberDecimal"
+            android:fontFamily="@font/montserrat"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_stock_buying_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_stock_name"
+            app:layout_constraintTop_toTopOf="@id/tv_stock_buying_price" />
+
+        <TextView
+            android:id="@+id/tv_stock_selling_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="Selling price"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_stock_buying_price"
+            app:layout_constraintStart_toStartOf="@id/tv_stock_buying_price"
+            app:layout_constraintTop_toBottomOf="@id/tv_stock_buying_price" />
+
+        <EditText
+            android:id="@+id/et_stock_selling_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="Selling Price"
+            android:inputType="numberDecimal"
+            android:fontFamily="@font/montserrat"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_stock_selling_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_stock_selling_price"
+            app:layout_constraintTop_toTopOf="@id/tv_stock_selling_price" />
+
+        <EditText
+            android:id="@+id/et_units"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="60dp"
+            android:hint="Units"
+            android:inputType="number"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_stock_selling_price" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/et_units"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="@id/et_units"
+            app:layout_constraintEnd_toEndOf="@id/et_units"
+            android:text="Add Stock"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary_blue"
-        tools:context=".ui.sellFragment.SellFragment">
+        tools:context=".ui.sell.SellFragment">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_searchBar_layout"

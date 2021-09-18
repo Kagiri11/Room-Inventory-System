@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home, container, false)
         binding.apply {
             upperLayout.setOnClickListener {
-                Toast.makeText(requireContext(),"You have pressed the upperLayout",Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_homeFragment_to_addStockFragment)
             }
             lowerLayout.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_sellFragment)

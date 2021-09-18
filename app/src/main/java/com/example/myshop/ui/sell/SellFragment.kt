@@ -1,15 +1,13 @@
-package com.example.myshop.ui.sellFragment
+package com.example.myshop.ui.sell
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellBinding
 import com.example.myshop.model.Item
@@ -17,7 +15,6 @@ import com.example.myshop.ui.adapters.CartItemAdapter
 import com.example.myshop.ui.adapters.SellItemAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SellFragment : Fragment() {
@@ -27,14 +24,13 @@ class SellFragment : Fragment() {
     private val itemAdapter = CartItemAdapter()
     private lateinit var binding: FragmentSellBinding
 
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sell, container, false)
-
-
 
         itemAdapter.setOnItemClickListener {
             removeFromCart(it)
@@ -48,12 +44,18 @@ class SellFragment : Fragment() {
             binding.rvCart.adapter=itemAdapter
         })
 
-        sellViewModel.items.observe(viewLifecycleOwner, {
+        sellViewModel.items.observe(viewLifecycleOwner, { dbItems->
             sellAdapter.setOnItemClickListener { ite->
                 addToCart(ite)
             }
-            sellAdapter.differ.submitList(it)
+            sellAdapter.differ.submitList(dbItems)
             binding.rvSellItems.adapter = sellAdapter
+            binding.tvItemCount.setOnClickListener {
+                println("Heyyy")
+                for (item in dbItems){
+                    sellViewModel.deleteItem(item)
+                }
+            }
         })
 
         handleBottomSheet()
