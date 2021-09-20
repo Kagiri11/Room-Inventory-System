@@ -2,15 +2,12 @@ package com.example.myshop.ui.sell
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.myshop.model.Item
+import com.example.myshop.repositories.ShopRepo
 import com.example.myshop.repositories.ShopRepository
 import kotlinx.coroutines.launch
 
 class SellViewModel
-@ViewModelInject constructor(private val shopRepository: ShopRepository): ViewModel(){
-
-     val itemCount = liveData {
-         emit(shopRepository.getItems().count())
-     }
+@ViewModelInject constructor(private val shopRepository: ShopRepo): ViewModel(){
 
     val items = liveData {
         emit(shopRepository.getItems())
