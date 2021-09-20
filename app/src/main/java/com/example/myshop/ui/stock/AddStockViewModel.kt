@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myshop.model.Item
-import com.example.myshop.repository.ShopRepository
+import com.example.myshop.repositories.ShopRepository
 import kotlinx.coroutines.launch
 
 

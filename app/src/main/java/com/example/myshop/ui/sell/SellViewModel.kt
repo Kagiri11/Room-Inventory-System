@@ -1,9 +1,8 @@
 package com.example.myshop.ui.sell
-
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.myshop.model.Item
-import com.example.myshop.repository.ShopRepository
+import com.example.myshop.repositories.ShopRepository
 import kotlinx.coroutines.launch
 
 class SellViewModel
@@ -27,7 +26,6 @@ class SellViewModel
     fun addToCart(item: Item){
         cartList.add(item)
         _sellCart2.value=cartList.toList()
-
     }
 
     fun removeFromCart(item: Item){
