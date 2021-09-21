@@ -40,7 +40,7 @@ class SellFragment : Fragment() {
             binding.tvItemCount.text = "${list.sumOf { it.sellingPrice }} /="
             binding.tvCartCount.text = "${list.count()} items"
             itemAdapter.cartList=list.toMutableList()
-            itemAdapter.differ.submitList(list)
+            itemAdapter.differ.submitList(list.toSet().toList())
             binding.rvCart.adapter=itemAdapter
         })
 

@@ -7,7 +7,7 @@ import com.example.myshop.repositories.ShopRepository
 import kotlinx.coroutines.launch
 
 class SellViewModel
-@ViewModelInject constructor(private val shopRepository: ShopRepo): ViewModel(){
+@ViewModelInject constructor(private val shopRepository: ShopRepository): ViewModel(){
 
     val items = liveData {
         emit(shopRepository.getItems())
@@ -38,19 +38,8 @@ class SellViewModel
         shopRepository.deleteItem(item)
     }
 
-    private fun myFilterAndSumBy2(list :MutableList<Item>):MutableList<Item>{
-        val cartTwo = mutableListOf<Item>()
-        for(item in list){
-            if(!cartTwo.contains(item)){
-                cartTwo.add(item)
-            }else{
-                val secondValue = cartTwo.filter { it.name == item.name }.sumByDouble { it.sellingPrice } + item.sellingPrice
-                val truePair = Item(id = item.id,name = item.name,sellingPrice= secondValue,buyingPrice = item.buyingPrice)
-                cartTwo.remove(item)
-                cartTwo.add(truePair)
-            }
-        }
-        return cartTwo
+    fun sellCart(){
+
     }
 
 }
