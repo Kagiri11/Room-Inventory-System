@@ -44,11 +44,15 @@ class SellFragment : Fragment() {
             binding.rvCart.adapter=itemAdapter
         })
 
+        binding.btnSell.setOnClickListener {
+            sellViewModel.sellCart()
+        }
+
         sellViewModel.items.observe(viewLifecycleOwner, { dbItems->
             sellAdapter.setOnItemClickListener { ite->
                 addToCart(ite)
             }
-            sellAdapter.differ.submitList(dbItems)
+            sellAdapter.differ.submitList(dbItems.toSet().toList())
             binding.rvSellItems.adapter = sellAdapter
             binding.tvItemCount.setOnClickListener {
                 println("Heyyy")

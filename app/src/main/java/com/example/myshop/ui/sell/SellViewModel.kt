@@ -39,7 +39,11 @@ class SellViewModel
     }
 
     fun sellCart(){
+        cartList.forEach { itemInCart->
+                val sameItemInDb = items.value?.first{ it.name == itemInCart.name }
+                deleteItem(sameItemInDb!!)
+            }
+        cartList.clear()
+        }
 
     }
-
-}
