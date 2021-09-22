@@ -13,6 +13,9 @@ class SellViewModel
         emit(shopRepository.getItems())
     }
 
+    private val _itemsByName = MutableLiveData<List<Item>>()
+    val itemsByName : LiveData<List<Item>> = _itemsByName
+
     val cartList = mutableListOf<Item>()
     var goodList2 = mutableListOf<Item>()
 
@@ -30,10 +33,6 @@ class SellViewModel
         _sellCart2.value=cartList.toList()
     }
 
-    fun add(item: Item)=viewModelScope.launch {
-        shopRepository.addItem(item)
-    }
-
     fun deleteItem(item: Item) = viewModelScope.launch {
         shopRepository.deleteItem(item)
     }
@@ -44,6 +43,11 @@ class SellViewModel
                 deleteItem(sameItemInDb!!)
             }
         cartList.clear()
-        }
+    }
+
+    fun searchItemByName(itemName:String) = viewModelScope.launch {
+        val items =shopRepository.searchItemsByName(itemName)
+        _itemsByName.value = items.toList().take(1)
+    }
 
     }

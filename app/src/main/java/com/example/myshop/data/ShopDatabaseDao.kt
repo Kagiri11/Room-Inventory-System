@@ -11,15 +11,12 @@ interface ShopDatabaseDao {
     @Delete
     suspend fun deleteItem(item: Item)
 
-
     @Query("SELECT * FROM item_table ORDER BY id  DESC")
     suspend fun getItems(): List<Item>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addItem(item: Item)
 
-    suspend fun deleteAll(list:List<Item>){
-
-    }
-
+    @Query("SELECT * FROM item_table WHERE name LIKE :itemName")
+    suspend fun searchItemsByName(itemName : String):List<Item>
 }

@@ -2,12 +2,16 @@ package com.example.myshop.ui.sell
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellBinding
 import com.example.myshop.model.Item
@@ -15,6 +19,9 @@ import com.example.myshop.ui.adapters.CartItemAdapter
 import com.example.myshop.ui.adapters.SellItemAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SellFragment : Fragment() {
@@ -48,12 +55,29 @@ class SellFragment : Fragment() {
             sellViewModel.sellCart()
         }
 
-        sellViewModel.items.observe(viewLifecycleOwner, { dbItems->
-            sellAdapter.setOnItemClickListener { ite->
+        var search : Job? =null
+
+        binding.etSearch.addTextChangedListener { editable->
+            search?.cancel()
+            search = lifecycleScope.launch {
+                editable.let {
+                    if(editable.toString().isNotEmpty()){
+                        sellViewModel.searchItemByName(editable.toString())
+                    }
+                }
+            }
+        }
+
+        sellViewModel.itemsByName.observe(viewLifecycleOwner,{ searchedItems ->
+            sellAdapter.setOnItemClickListener {ite->
                 addToCart(ite)
             }
-            sellAdapter.differ.submitList(dbItems.toSet().toList())
+            sellAdapter.differ.submitList(searchedItems.toSet().toList())
             binding.rvSellItems.adapter = sellAdapter
+        })
+
+
+        sellViewModel.items.observe(viewLifecycleOwner, { dbItems->
             binding.tvItemCount.setOnClickListener {
                 println("Heyyy")
                 for (item in dbItems){
@@ -69,14 +93,10 @@ class SellFragment : Fragment() {
 
     private fun addToCart(item: Item) {
         sellViewModel.addToCart(item)
-        println(sellViewModel.cartList)
-        println(sellViewModel.goodList2)
     }
 
     private fun removeFromCart(item: Item) {
         sellViewModel.removeFromCart(item)
-        println(sellViewModel.cartList)
-        println(sellViewModel.goodList2)
     }
 
     private fun handleBottomSheet() {

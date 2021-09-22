@@ -10,9 +10,9 @@ class ShopRepository
 ) : ShopRepo {
 
     override suspend fun addItem(item: Item)=shopDao.addItem(item)
-
     override suspend fun deleteItem(item: Item)=shopDao.deleteItem(item)
-
     override suspend fun getItems()=shopDao.getItems()
+
+    suspend fun searchItemsByName(itemName : String) = shopDao.searchItemsByName(itemName)
 
 }

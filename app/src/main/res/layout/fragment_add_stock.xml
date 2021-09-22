@@ -12,6 +12,19 @@
         android:layout_height="match_parent"
         tools:context=".ui.stock.AddStockFragment">
 
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"/>
+
+
+
+
         <TextView
             android:id="@+id/tv_stock_name"
             android:layout_width="wrap_content"

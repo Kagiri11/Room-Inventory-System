@@ -42,11 +42,14 @@ class AddStockFragment : Fragment() {
             updateStockCart()
 
             lifecycleScope.launch {
-                Toast.makeText(requireContext(),"Your stock of $itemName has been added",Toast.LENGTH_SHORT).show()
                 delay(2500)
-                findNavController().navigateUp()
+                Toast.makeText(requireContext(),"Your stock of $itemName has been added",Toast.LENGTH_SHORT).show()
             }
 
+        }
+
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
         }
         return binding.root
     }
