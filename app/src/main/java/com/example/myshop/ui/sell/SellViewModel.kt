@@ -12,16 +12,13 @@ class SellViewModel
     val items = liveData {
         emit(shopRepository.getItems())
     }
-
     private val _itemsByName = MutableLiveData<List<Item>>()
     val itemsByName : LiveData<List<Item>> = _itemsByName
-
     val cartList = mutableListOf<Item>()
     var goodList2 = mutableListOf<Item>()
 
     val _sellCart2 = MutableLiveData<List<Item>>()
     val sellCart2 : LiveData<List<Item>> = _sellCart2
-
 
     fun addToCart(item: Item){
         cartList.add(item)
@@ -49,5 +46,4 @@ class SellViewModel
         val items =shopRepository.searchItemsByName(itemName)
         _itemsByName.value = items.toList().take(1)
     }
-
-    }
+}

@@ -31,7 +31,6 @@ class SellFragment : Fragment() {
     private val itemAdapter = CartItemAdapter()
     private lateinit var binding: FragmentSellBinding
 
-
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +42,7 @@ class SellFragment : Fragment() {
             removeFromCart(it)
         }
 
+        //Here, I am checking for the items in the cart and submitting that list to the cart recyclerview
         sellViewModel.sellCart2.observe(viewLifecycleOwner,{ list->
             binding.tvItemCount.text = "${list.sumOf { it.sellingPrice }} /="
             binding.tvCartCount.text = "${list.count()} items"
@@ -69,6 +69,8 @@ class SellFragment : Fragment() {
             }
         }
 
+        //The sell items recyclerview will only be populated by items that match
+        //the search pattern
         sellViewModel.itemsByName.observe(viewLifecycleOwner,{ searchedItems ->
             sellAdapter.setOnItemClickListener {ite->
                 addToCart(ite)
@@ -77,15 +79,6 @@ class SellFragment : Fragment() {
             binding.rvSellItems.adapter = sellAdapter
         })
 
-
-        sellViewModel.items.observe(viewLifecycleOwner, { dbItems->
-            binding.tvItemCount.setOnClickListener {
-                println("Heyyy")
-                for (item in dbItems){
-                    sellViewModel.deleteItem(item)
-                }
-            }
-        })
 
         handleBottomSheet()
 
@@ -100,6 +93,9 @@ class SellFragment : Fragment() {
         sellViewModel.removeFromCart(item)
     }
 
+    /**
+     * This function is responsible for drawing the bottom sheet that hosts that items cart
+     */
     private fun handleBottomSheet() {
         BottomSheetBehavior.from(binding.bottomSheetLayout).apply {
             peekHeight = 150

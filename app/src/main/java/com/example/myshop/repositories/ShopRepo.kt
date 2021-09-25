@@ -1,7 +1,6 @@
 package com.example.myshop.repositories
 
 import com.example.myshop.model.Item
-
 interface ShopRepo {
 
     suspend fun addItem(item : Item)

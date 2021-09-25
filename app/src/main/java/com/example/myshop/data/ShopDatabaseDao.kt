@@ -3,6 +3,7 @@ package com.example.myshop.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.myshop.model.Item
+import com.example.myshop.model.SellEntry
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -19,4 +20,6 @@ interface ShopDatabaseDao {
 
     @Query("SELECT * FROM item_table WHERE name LIKE :itemName")
     suspend fun searchItemsByName(itemName : String):List<Item>
+
+    suspend fun getSellEntries():List<SellEntry>
 }
