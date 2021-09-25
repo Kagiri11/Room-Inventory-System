@@ -62,7 +62,8 @@ class SellFragment : Fragment() {
             search = lifecycleScope.launch {
                 editable.let {
                     if(editable.toString().isNotEmpty()){
-                        sellViewModel.searchItemByName(editable.toString())
+                        val itemName = "%${editable.toString()}%"
+                        sellViewModel.searchItemByName(itemName)
                     }
                 }
             }
