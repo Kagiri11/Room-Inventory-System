@@ -21,5 +21,8 @@ interface ShopDatabaseDao {
     @Query("SELECT * FROM item_table WHERE name LIKE :itemName")
     suspend fun searchItemsByName(itemName : String):List<Item>
 
+    @Query("SELECT * FROM sells_table ORDER BY id DESC")
     suspend fun getSellEntries():List<SellEntry>
+
+
 }
