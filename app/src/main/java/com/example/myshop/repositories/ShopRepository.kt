@@ -2,6 +2,7 @@ package com.example.myshop.repositories
 
 import com.example.myshop.data.ShopDatabaseDao
 import com.example.myshop.model.Item
+import com.example.myshop.model.SellEntry
 import javax.inject.Inject
 
 class ShopRepository 
@@ -15,4 +16,7 @@ class ShopRepository
 
     suspend fun searchItemsByName(itemName : String) = shopDao.searchItemsByName(itemName)
 
+    override suspend fun getSellEntries(): List<SellEntry> {
+        return shopDao.getSellEntries()
+    }
 }
