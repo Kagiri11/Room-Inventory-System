@@ -19,4 +19,5 @@ class ShopRepository
     override suspend fun getSellEntries(): List<SellEntry> {
         return shopDao.getSellEntries()
     }
+
 }
