@@ -7,7 +7,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         app:cardBackgroundColor="@color/primary_blue"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="10dp"
@@ -19,6 +19,48 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_sell_entry_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="324fgdf3"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/tv_sell_entry_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12:03 PM"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/rv_sold_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_sell_entry_time"
+                android:layout_marginTop="5dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profit: 230.50 /="
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@id/rv_sold_items"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/white"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
