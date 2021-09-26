@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_add_stock.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_sell.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_sell_history.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/item_cart.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/item_sell.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_sell_entry.xml" value="0.33" />

@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.databinding.ItemSellBinding
+import com.example.myshop.databinding.ItemSellEntryBinding
 import com.example.myshop.model.Item
 
 class SellItemAdapter : RecyclerView.Adapter<SellItemAdapter.SellItemViewHolder>(){
 
-    class SellItemViewHolder(val binding:ItemSellBinding): RecyclerView.ViewHolder(binding.root)
+    class SellItemViewHolder(val binding: ItemSellEntryBinding): RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Item>() {
 

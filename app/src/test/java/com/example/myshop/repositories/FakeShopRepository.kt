@@ -2,6 +2,7 @@ package com.example.myshop.repositories
 
 import androidx.lifecycle.MutableLiveData
 import com.example.myshop.model.Item
+import com.example.myshop.model.SellEntry
 
 class FakeShopRepository : ShopRepo{
 
@@ -19,5 +20,9 @@ class FakeShopRepository : ShopRepo{
 
     override suspend fun getItems(): List<Item> {
         return stockList
+    }
+
+    override suspend fun getSellEntries(): List<SellEntry> {
+        return emptyList()
     }
 }

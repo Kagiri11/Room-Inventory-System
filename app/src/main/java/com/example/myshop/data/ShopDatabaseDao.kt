@@ -24,4 +24,7 @@ interface ShopDatabaseDao {
     @Query("SELECT * FROM sells_table ORDER BY id DESC")
     suspend fun getSellEntries():List<SellEntry>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addSellEntry(entry:SellEntry)
+
 }
