@@ -20,4 +20,8 @@ class ShopRepository
         return shopDao.getSellEntries()
     }
 
+    override suspend fun addEntry(entry: SellEntry) {
+        return shopDao.addSellEntry(entry)
+    }
+
 }

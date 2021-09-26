@@ -9,6 +9,5 @@ data class SellEntry(
     val id : Int=0,
     val soldItems: List<String>,
     val totalProfit:Double,
-    val sellTime:String,
     val timeSold: String
 )

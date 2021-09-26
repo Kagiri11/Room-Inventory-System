@@ -1,17 +1,20 @@
 package com.example.myshop.ui.sell
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellBinding
 import com.example.myshop.model.Item
@@ -31,6 +34,7 @@ class SellFragment : Fragment() {
     private val itemAdapter = CartItemAdapter()
     private lateinit var binding: FragmentSellBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +44,10 @@ class SellFragment : Fragment() {
 
         itemAdapter.setOnItemClickListener {
             removeFromCart(it)
+        }
+
+        binding.tvItemCount.setOnClickListener {
+            findNavController().navigate(R.id.action_sellFragment_to_sellHistoryFragment)
         }
 
         //Here, I am checking for the items in the cart and submitting that list to the cart recyclerview

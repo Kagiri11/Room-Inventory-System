@@ -13,7 +13,7 @@ import com.example.myshop.model.Item
 
 class SellItemAdapter : RecyclerView.Adapter<SellItemAdapter.SellItemViewHolder>(){
 
-    class SellItemViewHolder(val binding: ItemSellEntryBinding): RecyclerView.ViewHolder(binding.root)
+    class SellItemViewHolder(val binding: ItemSellBinding): RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Item>() {
 
@@ -30,7 +30,7 @@ class SellItemAdapter : RecyclerView.Adapter<SellItemAdapter.SellItemViewHolder>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SellItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemSellBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_sell,parent,false)
+        val binding: ItemSellBinding= DataBindingUtil.inflate(layoutInflater, R.layout.item_sell,parent,false)
         return SellItemViewHolder(binding)
     }
 

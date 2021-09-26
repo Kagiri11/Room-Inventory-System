@@ -60,6 +60,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <TextView
+                    android:id="@+id/tv_sell_entry_profit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Profit: 230.50 /="

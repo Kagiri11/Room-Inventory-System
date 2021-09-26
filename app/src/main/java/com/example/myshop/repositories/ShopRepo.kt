@@ -11,4 +11,6 @@ interface ShopRepo {
 
     suspend fun getSellEntries():List<SellEntry>
 
+    suspend fun addEntry(entry: SellEntry)
+
 }

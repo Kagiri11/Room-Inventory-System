@@ -21,9 +21,17 @@
         android:id="@+id/sellFragment"
         android:name="com.example.myshop.ui.sell.SellFragment"
         android:label="fragment_sell"
-        tools:layout="@layout/fragment_sell" />
+        tools:layout="@layout/fragment_sell" >
+        <action
+            android:id="@+id/action_sellFragment_to_sellHistoryFragment"
+            app:destination="@id/sellHistoryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addStockFragment"
         android:name="com.example.myshop.ui.stock.AddStockFragment"
         android:label="AddStockFragment" />
+    <fragment
+        android:id="@+id/sellHistoryFragment"
+        android:name="com.example.myshop.ui.sellhistory.SellHistoryFragment"
+        android:label="SellHistoryFragment" />
 </navigation>

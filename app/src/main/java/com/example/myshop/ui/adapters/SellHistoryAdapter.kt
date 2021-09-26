@@ -10,8 +10,8 @@ import com.example.myshop.R
 import com.example.myshop.databinding.ItemSellEntryBinding
 import com.example.myshop.model.SellEntry
 
-class SellHistoryAdapter : RecyclerView.Adapter<SellItemAdapter.SellItemViewHolder>() {
-    class SellHistoryViewHolder(val binding : ItemSellEntryBinding): RecyclerView.ViewHolder(binding.root)
+class SellHistoryAdapter : RecyclerView.Adapter<SellHistoryAdapter.SellHistoryViewHolder>() {
+    class SellHistoryViewHolder( val binding : ItemSellEntryBinding): RecyclerView.ViewHolder(binding.root)
 
     val itemList = listOf<String>()
 
@@ -31,17 +31,18 @@ class SellHistoryAdapter : RecyclerView.Adapter<SellItemAdapter.SellItemViewHold
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SellItemAdapter.SellItemViewHolder {
+    ): SellHistoryAdapter.SellHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding : ItemSellEntryBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_sell_entry,parent,false)
-        return SellItemAdapter.SellItemViewHolder(binding)
+        return SellHistoryAdapter.SellHistoryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: SellItemAdapter.SellItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SellHistoryAdapter.SellHistoryViewHolder, position: Int) {
         val entry = differ.currentList[position]
         holder.binding.apply {
             tvSellEntryId.text = entry.id.toString()
-            tvSellEntryTime.text = entry.sellTime
+            tvSellEntryTime.text = entry.timeSold
+            tvSellEntryProfit.text = entry.totalProfit.toString()
         }
     }
 
