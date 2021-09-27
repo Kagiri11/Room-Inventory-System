@@ -53,11 +53,16 @@ class SellViewModel
     fun sellCart() {
 
         println(cartList)
+        val totalProfit = cartList.sumOf { it.profit }
+        val soldItemName = cartList.map { it.name }
+        val entry = SellEntry(soldItems = soldItemName, timeSold = timeSold, totalProfit = totalProfit)
+        println(totalProfit)
+        println(soldItemName)
+        println(entry)
 
-//        viewModelScope.launch {
-//            shopRepository.addEntry(entry)
-//        }
-
+        viewModelScope.launch {
+            shopRepository.addEntry(entry)
+        }
 //        cartList.forEach { itemInCart ->
 //            val sameItemInDb = items.value?.first { it.name == itemInCart.name }
 //            deleteItem(sameItemInDb!!)
@@ -66,6 +71,8 @@ class SellViewModel
 //        println(timeSold)
 //        println(totalProfit)
 //        cartList.clear()
+
+
     }
 
     fun searchItemByName(itemName: String) = viewModelScope.launch {

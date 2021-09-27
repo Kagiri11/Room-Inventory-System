@@ -13,7 +13,8 @@ import com.example.myshop.model.SellEntry
 class SellHistoryAdapter : RecyclerView.Adapter<SellHistoryAdapter.SellHistoryViewHolder>() {
     class SellHistoryViewHolder( val binding : ItemSellEntryBinding): RecyclerView.ViewHolder(binding.root)
 
-    val itemList = listOf<String>()
+    val itemList = mutableListOf<String>()
+
 
     private val differCallback = object : DiffUtil.ItemCallback<SellEntry>() {
 
@@ -39,10 +40,12 @@ class SellHistoryAdapter : RecyclerView.Adapter<SellHistoryAdapter.SellHistoryVi
 
     override fun onBindViewHolder(holder: SellHistoryAdapter.SellHistoryViewHolder, position: Int) {
         val entry = differ.currentList[position]
+        val stringAdapter = CartListStringAdapter(entry.soldItems)
         holder.binding.apply {
             tvSellEntryId.text = entry.id.toString()
             tvSellEntryTime.text = entry.timeSold
             tvSellEntryProfit.text = entry.totalProfit.toString()
+            rvSoldItems.adapter =stringAdapter
         }
     }
 

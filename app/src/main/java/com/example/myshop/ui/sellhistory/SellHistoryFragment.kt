@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SellHistoryFragment : Fragment() {
     private val sellHistoryViewModel : SellHistoryViewModel by viewModels()
     private lateinit var binding: FragmentSellHistoryBinding
-    val sellHistoryAdapter = SellHistoryAdapter()
+    private val sellHistoryAdapter = SellHistoryAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
