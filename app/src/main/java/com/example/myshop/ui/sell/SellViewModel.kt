@@ -6,7 +6,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
-import com.example.myshop.repositories.ShopRepository
+import com.example.myshop.data.repositories.ShopRepository
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -22,8 +22,10 @@ class SellViewModel
     private val _itemsByName = MutableLiveData<List<Item>>()
     val itemsByName: LiveData<List<Item>> = _itemsByName
     val cartList = mutableListOf<Item>()
-    var goodList2 = mutableListOf<Item>()
 
+    val itemsInDb= viewModelScope.launch {
+        shopRepository.getItems()
+    }
 
     val _sellCart2 = MutableLiveData<List<Item>>()
     val sellCart2: LiveData<List<Item>> = _sellCart2
@@ -42,37 +44,30 @@ class SellViewModel
         shopRepository.deleteItem(item)
     }
 
-
-    val soldItemName = cartList.map { it.name }
-    val totalProfit = cartList.sumOf { it.profit }
     @RequiresApi(Build.VERSION_CODES.O)
-    val timeSold = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
-
-    val entry = SellEntry(soldItems = soldItemName, timeSold = timeSold, totalProfit = totalProfit)
+    val timeSold: String = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))!!
 
     fun sellCart() {
 
-        println(cartList)
+        println(items.value)
+
         val totalProfit = cartList.sumOf { it.profit }
         val soldItemName = cartList.map { it.name }
         val entry = SellEntry(soldItems = soldItemName, timeSold = timeSold, totalProfit = totalProfit)
         println(totalProfit)
         println(soldItemName)
         println(entry)
+//
+//        viewModelScope.launch {
+//            shopRepository.addEntry(entry)
+//        }
 
-        viewModelScope.launch {
-            shopRepository.addEntry(entry)
-        }
 //        cartList.forEach { itemInCart ->
 //            val sameItemInDb = items.value?.first { it.name == itemInCart.name }
 //            deleteItem(sameItemInDb!!)
 //        }
 
-//        println(timeSold)
-//        println(totalProfit)
 //        cartList.clear()
-
-
     }
 
     fun searchItemByName(itemName: String) = viewModelScope.launch {

@@ -1,4 +1,4 @@
-package com.example.myshop.repositories
+package com.example.myshop.data.repositories
 
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry

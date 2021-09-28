@@ -34,6 +34,8 @@ class SellFragment : Fragment() {
     private val itemAdapter = CartItemAdapter()
     private lateinit var binding: FragmentSellBinding
 
+    var itemsInDatabase = listOf<Item>()
+
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -59,9 +61,23 @@ class SellFragment : Fragment() {
             binding.rvCart.adapter=itemAdapter
         })
 
-        binding.btnSell.setOnClickListener {
-            sellViewModel.sellCart()
-        }
+        sellViewModel.items.observe(viewLifecycleOwner, { itemsInDataBase->
+            itemsInDatabase=itemsInDataBase
+        })
+
+        sellViewModel.sellCart2.observe(viewLifecycleOwner,{ itemsInCart->
+            binding.btnSell.setOnClickListener {
+                itemsInCart.forEach { cartItem->
+                    val sameItemInDb = itemsInDatabase.first { it.name ==  cartItem.name}
+                    sellViewModel.deleteItem(sameItemInDb)
+                }
+
+            }
+        })
+
+//        binding.btnSell.setOnClickListener {
+//            sellViewModel.sellCart()
+//        }
 
         var search : Job? =null
 

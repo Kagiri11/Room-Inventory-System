@@ -3,7 +3,7 @@ package com.example.myshop.ui.sellhistory
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.myshop.repositories.ShopRepository
+import com.example.myshop.data.repositories.ShopRepository
 
 class SellHistoryViewModel @ViewModelInject  constructor(
    private val shopRepository: ShopRepository

@@ -1,7 +1,7 @@
 package com.example.myshop.di
 
 import com.example.myshop.data.ShopDatabaseDao
-import com.example.myshop.repositories.ShopRepository
+import com.example.myshop.data.repositories.ShopRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ object ShopRepositoryModule {
 
     @Provides
     @Singleton
-    fun provideShopRepository(dao: ShopDatabaseDao):ShopRepository{
+    fun provideShopRepository(dao: ShopDatabaseDao): ShopRepository {
         return ShopRepository(dao)
     }
 

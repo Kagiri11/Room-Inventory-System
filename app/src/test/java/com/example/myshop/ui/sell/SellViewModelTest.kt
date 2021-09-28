@@ -2,7 +2,7 @@ package com.example.myshop.ui.sell
 
 import com.example.myshop.model.Item
 import com.example.myshop.repositories.FakeShopRepository
-import com.example.myshop.repositories.ShopRepository
+import com.example.myshop.data.repositories.ShopRepository
 import com.google.common.truth.Truth
 import org.junit.Before
 
