@@ -61,23 +61,22 @@ class SellFragment : Fragment() {
             binding.rvCart.adapter=itemAdapter
         })
 
-        sellViewModel.items.observe(viewLifecycleOwner, { itemsInDataBase->
-            itemsInDatabase=itemsInDataBase
-        })
+//        sellViewModel.items.observe(viewLifecycleOwner, { itemsInDataBase->
+//            itemsInDatabase=itemsInDataBase
+//        })
 
-        sellViewModel.sellCart2.observe(viewLifecycleOwner,{ itemsInCart->
-            binding.btnSell.setOnClickListener {
-                itemsInCart.forEach { cartItem->
-                    val sameItemInDb = itemsInDatabase.first { it.name ==  cartItem.name}
-                    sellViewModel.deleteItem(sameItemInDb)
-                }
+//        sellViewModel.sellCart2.observe(viewLifecycleOwner,{ itemsInCart->
+//            binding.btnSell.setOnClickListener {
+//                itemsInCart.forEach { cartItem->
+//                    val sameItemInDb = itemsInDatabase.first { it.name ==  cartItem.name}
+//                    sellViewModel.deleteItem(sameItemInDb)
+//                }
+//            }
+//        })
 
-            }
-        })
-
-//        binding.btnSell.setOnClickListener {
-//            sellViewModel.sellCart()
-//        }
+        binding.btnSell.setOnClickListener {
+            sellViewModel.sellCart()
+        }
 
         var search : Job? =null
 

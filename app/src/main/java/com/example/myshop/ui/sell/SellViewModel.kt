@@ -15,7 +15,7 @@ import java.time.format.FormatStyle
 
 class SellViewModel
 @ViewModelInject constructor(private val shopRepository: ShopRepository) : ViewModel() {
-
+    var dbItems = listOf<Item>()
     val items = liveData {
         emit(shopRepository.getItems())
     }
@@ -25,6 +25,16 @@ class SellViewModel
 
     val itemsInDb= viewModelScope.launch {
         shopRepository.getItems()
+    }
+
+    init {
+        prepareDbItems()
+    }
+
+    private fun prepareDbItems(){
+        viewModelScope.launch {
+            dbItems = shopRepository.getItems()
+        }
     }
 
     val _sellCart2 = MutableLiveData<List<Item>>()
@@ -47,27 +57,25 @@ class SellViewModel
     @RequiresApi(Build.VERSION_CODES.O)
     val timeSold: String = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))!!
 
-    fun sellCart() {
-
+     fun sellCart() {
         println(items.value)
-
         val totalProfit = cartList.sumOf { it.profit }
         val soldItemName = cartList.map { it.name }
         val entry = SellEntry(soldItems = soldItemName, timeSold = timeSold, totalProfit = totalProfit)
         println(totalProfit)
         println(soldItemName)
         println(entry)
-//
-//        viewModelScope.launch {
-//            shopRepository.addEntry(entry)
-//        }
 
-//        cartList.forEach { itemInCart ->
-//            val sameItemInDb = items.value?.first { it.name == itemInCart.name }
-//            deleteItem(sameItemInDb!!)
-//        }
+        viewModelScope.launch {
+            shopRepository.addEntry(entry)
+        }
 
-//        cartList.clear()
+        cartList.forEach { itemInCart ->
+            val sameItemInDb = dbItems.first { it.name == itemInCart.name }
+            deleteItem(sameItemInDb)
+        }
+
+        cartList.clear()
     }
 
     fun searchItemByName(itemName: String) = viewModelScope.launch {
