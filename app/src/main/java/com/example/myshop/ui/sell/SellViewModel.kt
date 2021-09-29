@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.example.myshop.data.repositories.ShopRepo
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 import com.example.myshop.data.repositories.ShopRepository
@@ -14,9 +15,9 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 class SellViewModel
-@ViewModelInject constructor(private val shopRepository: ShopRepository) : ViewModel() {
+@ViewModelInject constructor(private val shopRepository: ShopRepo) : ViewModel() {
     var dbItems = listOf<Item>()
-    val items = liveData {
+    private val items = liveData {
         emit(shopRepository.getItems())
     }
     private val _itemsByName = MutableLiveData<List<Item>>()

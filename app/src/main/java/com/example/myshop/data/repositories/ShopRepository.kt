@@ -14,7 +14,7 @@ class ShopRepository
     override suspend fun deleteItem(item: Item)=shopDao.deleteItem(item)
     override suspend fun getItems()=shopDao.getItems()
 
-    suspend fun searchItemsByName(itemName : String) = shopDao.searchItemsByName(itemName)
+    override suspend fun searchItemsByName(nameOfItem : String) = shopDao.searchItemsByName(nameOfItem)
 
     override suspend fun getSellEntries(): List<SellEntry> {
         return shopDao.getSellEntries()
@@ -23,5 +23,6 @@ class ShopRepository
     override suspend fun addEntry(entry: SellEntry) {
         return shopDao.addSellEntry(entry)
     }
+
 
 }

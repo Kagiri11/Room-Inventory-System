@@ -13,4 +13,6 @@ interface ShopRepo {
 
     suspend fun addEntry(entry: SellEntry)
 
+    suspend fun searchItemsByName(nameOfItem: String):List<Item>
+
 }

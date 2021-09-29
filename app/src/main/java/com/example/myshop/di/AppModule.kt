@@ -1,5 +1,8 @@
 package com.example.myshop.di
 
+import com.example.myshop.data.ShopDatabaseDao
+import com.example.myshop.data.repositories.ShopRepo
+import com.example.myshop.data.repositories.ShopRepository
 import com.example.myshop.ui.adapters.CartItemAdapter
 import com.example.myshop.ui.adapters.CartListStringAdapter
 import com.example.myshop.ui.adapters.SellHistoryAdapter
@@ -12,8 +15,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object AdaptersModule {
+object AppModule {
 
+    //Adapters provided here
     @Provides
     @Singleton
     fun provideSellHistoryAdapter() = SellHistoryAdapter()
@@ -25,6 +29,14 @@ object AdaptersModule {
     @Provides
     @Singleton
     fun sellItemAdapter() = SellItemAdapter()
+
+    //Repository details
+    @Provides
+    @Singleton
+    fun provideShopRepository(dao: ShopDatabaseDao): ShopRepo {
+        return ShopRepository(dao)
+    }
+
 
 
 }
