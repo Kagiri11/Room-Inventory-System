@@ -41,12 +41,11 @@ class SellFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     val timeSold: String = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))!!
 
-
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sell, container, false)
 
         itemAdapter.setOnItemClickListener {
