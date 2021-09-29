@@ -33,6 +33,10 @@ class SellHistoryFragment : Fragment() {
             binding.rvSellHistory.adapter = sellHistoryAdapter
         })
 
+        sellHistoryViewModel.daysProfit.observe(viewLifecycleOwner,{
+            binding.tvDailyProfit.text = it.toString()
+        })
+
         return binding.root
     }
 
