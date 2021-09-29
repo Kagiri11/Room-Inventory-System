@@ -8,7 +8,7 @@ import javax.inject.Inject
 class ShopRepository 
 @Inject constructor(
    private val shopDao: ShopDatabaseDao
-) : ShopRepo {
+) : Repository {
 
     override suspend fun addItem(item: Item)=shopDao.addItem(item)
     override suspend fun deleteItem(item: Item)=shopDao.deleteItem(item)

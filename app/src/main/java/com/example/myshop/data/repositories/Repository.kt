@@ -3,7 +3,7 @@ package com.example.myshop.data.repositories
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 
-interface ShopRepo {
+interface Repository {
 
     suspend fun addItem(item : Item)
     suspend fun deleteItem(item:Item)

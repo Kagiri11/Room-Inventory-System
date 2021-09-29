@@ -1,22 +1,17 @@
 package com.example.myshop.ui.sell
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myshop.data.repositories.ShopRepo
+import com.example.myshop.data.repositories.Repository
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 class SellViewModel
-@ViewModelInject constructor(private val shopRepository: ShopRepo) : ViewModel() {
+@ViewModelInject constructor(private val shopRepository: Repository) : ViewModel() {
     private var dbItems = listOf<Item>()
     private val _itemsByName = MutableLiveData<List<Item>>()
     val itemsByName: LiveData<List<Item>> = _itemsByName

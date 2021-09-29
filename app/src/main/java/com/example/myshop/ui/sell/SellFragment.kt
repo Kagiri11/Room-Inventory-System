@@ -15,7 +15,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellBinding
-import com.example.myshop.model.Item
 import com.example.myshop.ui.adapters.CartItemAdapter
 import com.example.myshop.ui.adapters.SellItemAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior

@@ -1,11 +1,11 @@
 package com.example.myshop.repositories
 
 import androidx.lifecycle.MutableLiveData
-import com.example.myshop.data.repositories.ShopRepo
+import com.example.myshop.data.repositories.Repository
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 
-class FakeShopRepository : ShopRepo {
+class FakeShopRepository : Repository {
 
     val stockList = mutableListOf<Item>()
 
