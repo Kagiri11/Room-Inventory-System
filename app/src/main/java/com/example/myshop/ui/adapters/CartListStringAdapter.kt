@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.databinding.ItemSoldStringBinding
 
-class CartListStringAdapter(val listOfItems : List<String>) : RecyclerView.Adapter<CartListStringAdapter.CartListStringViewHolder>() {
+class CartListStringAdapter(private val listOfItems : List<String>) : RecyclerView.Adapter<CartListStringAdapter.CartListStringViewHolder>() {
     class CartListStringViewHolder(val binding:ItemSoldStringBinding):RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<String>() {

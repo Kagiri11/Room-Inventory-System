@@ -1,5 +1,6 @@
 package com.example.myshop.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -38,13 +39,14 @@ class SellHistoryAdapter : RecyclerView.Adapter<SellHistoryAdapter.SellHistoryVi
         return SellHistoryAdapter.SellHistoryViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: SellHistoryAdapter.SellHistoryViewHolder, position: Int) {
         val entry = differ.currentList[position]
         val stringAdapter = CartListStringAdapter(entry.soldItems)
         holder.binding.apply {
             tvSellEntryId.text = entry.id.toString()
-            tvSellEntryTime.text = entry.timeSold
-            tvSellEntryProfit.text = entry.totalProfit.toString()
+            tvSellEntryTime.text = "Sell time: ${entry.timeSold}"
+            tvSellEntryProfit.text = "profit: ${entry.totalProfit.toString()} /="
             rvSoldItems.adapter =stringAdapter
         }
     }

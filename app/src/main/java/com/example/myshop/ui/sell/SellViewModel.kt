@@ -21,11 +21,7 @@ class SellViewModel
     }
     private val _itemsByName = MutableLiveData<List<Item>>()
     val itemsByName: LiveData<List<Item>> = _itemsByName
-    val cartList = mutableListOf<Item>()
-
-    val itemsInDb= viewModelScope.launch {
-        shopRepository.getItems()
-    }
+    private val cartList = mutableListOf<Item>()
 
     init {
         prepareDbItems()
@@ -37,7 +33,7 @@ class SellViewModel
         }
     }
 
-    val _sellCart2 = MutableLiveData<List<Item>>()
+    private val _sellCart2 = MutableLiveData<List<Item>>()
     val sellCart2: LiveData<List<Item>> = _sellCart2
 
     fun addToCart(item: Item) {
@@ -50,7 +46,7 @@ class SellViewModel
         _sellCart2.value = cartList.toList()
     }
 
-    fun deleteItem(item: Item) = viewModelScope.launch {
+    private fun deleteItem(item: Item) = viewModelScope.launch {
         shopRepository.deleteItem(item)
     }
 
@@ -66,9 +62,7 @@ class SellViewModel
         println(soldItemName)
         println(entry)
 
-        viewModelScope.launch {
-            shopRepository.addEntry(entry)
-        }
+        addAnEntry(entry)
 
         cartList.forEach { itemInCart ->
             val sameItemInDb = dbItems.first { it.name == itemInCart.name }
@@ -81,5 +75,11 @@ class SellViewModel
     fun searchItemByName(itemName: String) = viewModelScope.launch {
         val items = shopRepository.searchItemsByName(itemName)
         _itemsByName.value = items.toList().take(1)
+    }
+
+    fun addAnEntry(entry: SellEntry){
+        viewModelScope.launch {
+            shopRepository.addEntry(entry)
+        }
     }
 }

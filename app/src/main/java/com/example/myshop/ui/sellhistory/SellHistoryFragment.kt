@@ -12,12 +12,14 @@ import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellHistoryBinding
 import com.example.myshop.ui.adapters.SellHistoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SellHistoryFragment : Fragment() {
     private val sellHistoryViewModel : SellHistoryViewModel by viewModels()
     private lateinit var binding: FragmentSellHistoryBinding
-    private val sellHistoryAdapter = SellHistoryAdapter()
+    @Inject
+    lateinit var sellHistoryAdapter :SellHistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

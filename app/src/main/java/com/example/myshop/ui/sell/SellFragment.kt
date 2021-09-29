@@ -25,16 +25,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SellFragment : Fragment() {
 
     private val sellViewModel: SellViewModel by viewModels()
-    private val sellAdapter = SellItemAdapter()
-    private val itemAdapter = CartItemAdapter()
+    @Inject
+    lateinit var sellAdapter : SellItemAdapter
+    @Inject
+    lateinit var itemAdapter : CartItemAdapter
     private lateinit var binding: FragmentSellBinding
-
-    var itemsInDatabase = listOf<Item>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
@@ -60,19 +61,6 @@ class SellFragment : Fragment() {
             itemAdapter.differ.submitList(list.toSet().toList())
             binding.rvCart.adapter=itemAdapter
         })
-
-//        sellViewModel.items.observe(viewLifecycleOwner, { itemsInDataBase->
-//            itemsInDatabase=itemsInDataBase
-//        })
-
-//        sellViewModel.sellCart2.observe(viewLifecycleOwner,{ itemsInCart->
-//            binding.btnSell.setOnClickListener {
-//                itemsInCart.forEach { cartItem->
-//                    val sameItemInDb = itemsInDatabase.first { it.name ==  cartItem.name}
-//                    sellViewModel.deleteItem(sameItemInDb)
-//                }
-//            }
-//        })
 
         binding.btnSell.setOnClickListener {
             sellViewModel.sellCart()
