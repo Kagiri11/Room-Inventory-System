@@ -39,8 +39,7 @@ class SellFragment : Fragment() {
     private lateinit var binding: FragmentSellBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
-    val timeSold: String =
-        LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))!!
+    val timeSold: String = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))!!
 
 
     @SuppressLint("SetTextI18n")
