@@ -1,5 +1,6 @@
 package com.example.myshop.ui.sellhistory
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ class SellHistoryFragment : Fragment() {
     @Inject
     lateinit var sellHistoryAdapter :SellHistoryAdapter
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +36,7 @@ class SellHistoryFragment : Fragment() {
         })
 
         sellHistoryViewModel.dailyProfit.observe(viewLifecycleOwner,{
-            binding.tvDailyProfit.text = "Daily profit: ${it}"
+            binding.tvDailyProfit.text = "Daily profit: $it"
         })
 
         return binding.root
