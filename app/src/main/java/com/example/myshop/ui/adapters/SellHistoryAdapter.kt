@@ -12,42 +12,41 @@ import com.example.myshop.databinding.ItemSellEntryBinding
 import com.example.myshop.model.SellEntry
 
 class SellHistoryAdapter : RecyclerView.Adapter<SellHistoryAdapter.SellHistoryViewHolder>() {
-    class SellHistoryViewHolder( val binding : ItemSellEntryBinding): RecyclerView.ViewHolder(binding.root)
-
-    val itemList = mutableListOf<String>()
-
+    class SellHistoryViewHolder(val binding: ItemSellEntryBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<SellEntry>() {
 
         override fun areItemsTheSame(oldItem: SellEntry, newItem: SellEntry): Boolean {
-            return oldItem.id==newItem.id
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: SellEntry, newItem: SellEntry): Boolean {
-            return oldItem==newItem
+            return oldItem == newItem
         }
     }
 
-    val differ = AsyncListDiffer(this,differCallback)
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SellHistoryAdapter.SellHistoryViewHolder {
+    ): SellHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding : ItemSellEntryBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_sell_entry,parent,false)
-        return SellHistoryAdapter.SellHistoryViewHolder(binding)
+        val binding: ItemSellEntryBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.item_sell_entry, parent, false)
+        return SellHistoryViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: SellHistoryAdapter.SellHistoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SellHistoryViewHolder, position: Int) {
         val entry = differ.currentList[position]
         val stringAdapter = CartListStringAdapter(entry.soldItems)
         holder.binding.apply {
             tvSellEntryId.text = entry.id.toString()
-            tvSellEntryTime.text = "Sell time: ${entry.timeSold}"
-            tvSellEntryProfit.text = "profit: ${entry.totalProfit.toString()} /="
-            rvSoldItems.adapter =stringAdapter
+            tvSellEntryTime.text = "Sell time: ${entry.timeSold.take(5)}"
+            tvSellEntryProfit.text = "profit: ${entry.totalProfit} /="
+            rvSoldItems.adapter = stringAdapter
         }
     }
 

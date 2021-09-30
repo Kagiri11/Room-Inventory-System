@@ -1,39 +1,40 @@
 package com.example.myshop.ui.sellhistory
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.annotation.SuppressLint
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.myshop.data.repositories.ShopRepository
 import com.example.myshop.model.SellEntry
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.LocalDateTime.now
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SellHistoryViewModel @ViewModelInject  constructor(
    private val shopRepository: ShopRepository
 ):ViewModel() {
+    @SuppressLint("SimpleDateFormat")
+    val format = SimpleDateFormat("dd/M/yyyy")
+    private val dateToday: String = format.format(Calendar.getInstance().time)
     var listOfEntries = listOf<SellEntry>()
-    @RequiresApi(Build.VERSION_CODES.O)
-    val dateToday: String = now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
-    val sellEntries = liveData {
-        emit(shopRepository.getSellEntries())
-    }
+    private val _dailyProfit = MutableLiveData<Double>()
+    val dailyProfit: LiveData<Double> = _dailyProfit
     init {
         initializeSellEntries()
-    }
 
-    val daysProfit = liveData {
-        emit(listOfEntries.filter { it.timeSold.contains(dateToday) }.sumOf { it.totalProfit })
+        println("SellHistoryViewModel has been initialised")
     }
 
     private fun initializeSellEntries() {
         viewModelScope.launch {
             listOfEntries = shopRepository.getSellEntries()
+            _dailyProfit.value=listOfEntries.filter { it.timeSold.contains(dateToday) }.sumOf { it.totalProfit }
         }
     }
+
+
+
+    val sellEntries = liveData {
+        emit(shopRepository.getSellEntries())
+    }
+
 }
