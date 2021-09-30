@@ -8,14 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.myshop.data.repositories.Repository
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
+import com.example.myshop.utils.Cart
 import kotlinx.coroutines.launch
 
 class SellViewModel
 @ViewModelInject constructor(private val shopRepository: Repository) : ViewModel() {
+
     private var dbItems = listOf<Item>()
     private val _itemsByName = MutableLiveData<List<Item>>()
     val itemsByName: LiveData<List<Item>> = _itemsByName
-    private val cartList = mutableListOf<Item>()
 
     init {
         prepareDbItems()
@@ -31,13 +32,13 @@ class SellViewModel
     val sellCart: LiveData<List<Item>> = _sellCart
 
     fun addToCart(item: Item) {
-        cartList.add(item)
-        _sellCart.value = cartList.toList()
+        Cart.addItemToCart(item)
+        _sellCart.value = Cart.space.toList()
     }
 
     fun removeFromCart(item: Item) {
-        cartList.remove(item)
-        _sellCart.value = cartList.toList()
+        Cart.removeItemFromCart(item)
+        _sellCart.value = Cart.space.toList()
     }
 
     private fun deleteItem(item: Item) = viewModelScope.launch {
@@ -47,16 +48,16 @@ class SellViewModel
     fun sellCart(timeOfSell:String) {
         val entry =
             SellEntry(
-                soldItems = cartList.map { it.name },
+                soldItems = Cart.space.map { it.name },
                 timeSold = timeOfSell,
-                totalProfit = cartList.sumOf { it.profit })
+                totalProfit = Cart.space.sumOf { it.profit })
 
         addEntry(entry)
         /**
          * Here I am finding any item in the database that matches the name of the current item being looped
          * in the cart and deleting that item from the database
          */
-        cartList.apply {
+        Cart.space.apply {
             forEach { itemInCart ->
                 val sameItemInDb = dbItems.first { it.name == itemInCart.name }
                 deleteItem(sameItemInDb)
