@@ -1,12 +1,10 @@
 package com.example.myshop.ui.sell
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,9 +19,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,16 +35,15 @@ class SellFragment : Fragment() {
     lateinit var itemAdapter: CartItemAdapter
     private lateinit var binding: FragmentSellBinding
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    val timeSold: String =
-        LocalDateTime.now().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))!!
-
+    @SuppressLint("SimpleDateFormat")
+    val format = SimpleDateFormat("hh:mm dd/M/yyyy")
+    val timeSold = format.format(Calendar.getInstance().time)
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sell, container, false)
 
         itemAdapter.setOnItemClickListener {
@@ -86,6 +82,7 @@ class SellFragment : Fragment() {
 
         binding.btnSell.setOnClickListener {
             sellViewModel.sellCart(timeSold)
+
         }
 
         var search: Job? = null
