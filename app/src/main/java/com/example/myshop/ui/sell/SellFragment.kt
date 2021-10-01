@@ -35,10 +35,6 @@ class SellFragment : Fragment() {
     lateinit var itemAdapter: CartItemAdapter
     private lateinit var binding: FragmentSellBinding
 
-    @SuppressLint("SimpleDateFormat")
-    val format = SimpleDateFormat("hh:mm dd/M/yyyy")
-    val timeSold = format.format(Calendar.getInstance().time)
-
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,8 +77,7 @@ class SellFragment : Fragment() {
         }
 
         binding.btnSell.setOnClickListener {
-            sellViewModel.sellCart(timeSold)
-
+            sellViewModel.sellCart()
         }
 
         var search: Job? = null
