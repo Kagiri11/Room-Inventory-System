@@ -9,6 +9,7 @@ import com.example.myshop.data.repositories.Repository
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 import com.example.myshop.utils.Cart
+import com.example.myshop.utils.TimeOfSell
 import kotlinx.coroutines.launch
 
 class SellViewModel
@@ -45,10 +46,10 @@ class SellViewModel
         shopRepository.deleteItem(item)
     }
 
-    fun sellCart(timeOfSell:String) {
+    fun sellCart() {
         addEntry(SellEntry(
             soldItems = Cart.space.map { it.name },
-            timeSold = timeOfSell,
+            timeSold = TimeOfSell.stamp(),
             totalProfit = Cart.space.sumOf { it.profit }))
         /**
          * Here I am finding any item in the database that matches the name of the current item being looped
