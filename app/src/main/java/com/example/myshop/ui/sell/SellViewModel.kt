@@ -46,24 +46,22 @@ class SellViewModel
     }
 
     fun sellCart(timeOfSell:String) {
-        val entry =
-            SellEntry(
-                soldItems = Cart.space.map { it.name },
-                timeSold = timeOfSell,
-                totalProfit = Cart.space.sumOf { it.profit })
-
-        addEntry(entry)
+        addEntry(SellEntry(
+            soldItems = Cart.space.map { it.name },
+            timeSold = timeOfSell,
+            totalProfit = Cart.space.sumOf { it.profit }))
         /**
          * Here I am finding any item in the database that matches the name of the current item being looped
          * in the cart and deleting that item from the database
          */
-        Cart.space.apply {
-            forEach { itemInCart ->
+        Cart.apply {
+            space.forEach { itemInCart ->
                 val sameItemInDb = dbItems.first { it.name == itemInCart.name }
                 deleteItem(sameItemInDb)
             }
-            clear()
+            refreshCart()
         }
+
     }
 
     fun searchItemByName(itemName: String) = viewModelScope.launch {
