@@ -10,7 +10,7 @@ interface Repository {
     suspend fun deleteItem(item:Item)
     suspend fun getItems():List<Item>
 
-    suspend fun getSellEntries():List<SellEntry>
+    fun getSellEntries():Flow<List<SellEntry>>
 
     suspend fun addEntry(entry: SellEntry)
 

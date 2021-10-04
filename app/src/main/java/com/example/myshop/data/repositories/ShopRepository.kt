@@ -3,6 +3,7 @@ package com.example.myshop.data.repositories
 import com.example.myshop.data.ShopDatabaseDao
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ShopRepository 
@@ -16,7 +17,7 @@ class ShopRepository
 
     override suspend fun searchItemsByName(nameOfItem : String) = shopDao.searchItemsByName(nameOfItem)
 
-    override suspend fun getSellEntries(): List<SellEntry> {
+    override fun getSellEntries(): Flow<List<SellEntry>> {
         return shopDao.getSellEntries()
     }
 

@@ -23,7 +23,7 @@ interface ShopDatabaseDao {
     fun searchItemsByName(itemName : String):Flow<List<Item>>
 
     @Query("SELECT * FROM sells_table ORDER BY id DESC")
-    suspend fun getSellEntries():List<SellEntry>
+    fun getSellEntries():Flow<List<SellEntry>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addSellEntry(entry:SellEntry)
