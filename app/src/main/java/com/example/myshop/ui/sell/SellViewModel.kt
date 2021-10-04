@@ -10,14 +10,16 @@ import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 import com.example.myshop.utils.Cart
 import com.example.myshop.utils.TimeOfSell
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 
 class SellViewModel
 @ViewModelInject constructor(private val shopRepository: Repository) : ViewModel() {
 
     private var dbItems = listOf<Item>()
-    private val _itemsByName = MutableLiveData<List<Item>>()
-    val itemsByName: LiveData<List<Item>> = _itemsByName
 
     init {
         prepareDbItems()
@@ -65,9 +67,8 @@ class SellViewModel
 
     }
 
-    fun searchItemByName(itemName: String) = viewModelScope.launch {
-        val items = shopRepository.searchItemsByName(itemName)
-        _itemsByName.value = items.toList().take(1)
+    suspend fun getItemsByName(itemName: String):Flow<List<Item>>{
+        return shopRepository.searchItemsByName(itemName)
     }
 
     private fun addEntry(entry: SellEntry) {

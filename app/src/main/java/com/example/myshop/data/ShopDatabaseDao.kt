@@ -5,6 +5,7 @@ import androidx.room.*
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Dao
 interface ShopDatabaseDao {
@@ -19,7 +20,7 @@ interface ShopDatabaseDao {
     suspend fun addItem(item: Item)
 
     @Query("SELECT * FROM item_table WHERE name LIKE :itemName")
-    suspend fun searchItemsByName(itemName : String):List<Item>
+    fun searchItemsByName(itemName : String):Flow<List<Item>>
 
     @Query("SELECT * FROM sells_table ORDER BY id DESC")
     suspend fun getSellEntries():List<SellEntry>

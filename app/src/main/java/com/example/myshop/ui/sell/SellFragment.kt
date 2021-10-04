@@ -18,6 +18,7 @@ import com.example.myshop.ui.adapters.SellItemAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -67,13 +68,15 @@ class SellFragment : Fragment() {
             /**
              * The sell items recyclerview will only be populated by items that match the search pattern
              */
-            itemsByName.observe(viewLifecycleOwner, { searchedItems ->
-                sellAdapter.setOnItemClickListener { ite ->
-                    addToCart(ite)
-                }
-                sellAdapter.differ.submitList(searchedItems.toSet().toList())
-                binding.rvSellItems.adapter = sellAdapter
-            })
+//            itemsByName.observe(viewLifecycleOwner, { searchedItems ->
+//                sellAdapter.setOnItemClickListener { ite ->
+//                    addToCart(ite)
+//                }
+//                sellAdapter.differ.submitList(searchedItems.toSet().toList())
+//                binding.rvSellItems.adapter = sellAdapter
+//            })
+
+
         }
 
         binding.btnSell.setOnClickListener {
@@ -88,7 +91,13 @@ class SellFragment : Fragment() {
                 editable.let {
                     if (editable.toString().isNotEmpty()) {
                         val itemName = "%${editable.toString()}%"
-                        sellViewModel.searchItemByName(itemName)
+                        sellViewModel.getItemsByName(itemName).collect { searchedItems->
+                            sellAdapter.setOnItemClickListener { ite ->
+                                sellViewModel.addToCart(ite)
+                            }
+                            sellAdapter.differ.submitList(searchedItems.take(1))
+                            binding.rvSellItems.adapter = sellAdapter
+                        }
                     }
                 }
             }

@@ -2,6 +2,7 @@ package com.example.myshop.data.repositories
 
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
+import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
@@ -13,6 +14,6 @@ interface Repository {
 
     suspend fun addEntry(entry: SellEntry)
 
-    suspend fun searchItemsByName(nameOfItem: String):List<Item>
+    suspend fun searchItemsByName(nameOfItem: String):Flow<List<Item>>
 
 }
