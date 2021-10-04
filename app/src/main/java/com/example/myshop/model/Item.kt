@@ -10,5 +10,6 @@ data class Item(
     val name:String,
     val buyingPrice:Double,
     var sellingPrice:Double,
-    val profit: Double =sellingPrice-buyingPrice
+    val profit: Double =sellingPrice-buyingPrice,
+    val userId: Int? = null
 )

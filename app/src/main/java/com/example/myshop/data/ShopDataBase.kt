@@ -7,7 +7,7 @@ import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 import com.example.myshop.utils.Konvatas
 
-@Database(entities = [Item::class,SellEntry::class],version = 3,exportSchema = false)
+@Database(entities = [Item::class,SellEntry::class],version = 2,exportSchema = false)
 @TypeConverters(Konvatas::class)
 abstract class ShopDataBase : RoomDatabase(){
 
