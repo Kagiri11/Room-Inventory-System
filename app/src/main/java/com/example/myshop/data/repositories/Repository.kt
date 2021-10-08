@@ -1,5 +1,6 @@
 package com.example.myshop.data.repositories
 
+import com.example.myshop.model.DailyProfits
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 import kotlinx.coroutines.flow.Flow
@@ -15,5 +16,11 @@ interface Repository {
     suspend fun addEntry(entry: SellEntry)
 
     suspend fun searchItemsByName(nameOfItem: String):Flow<List<Item>>
+
+    suspend fun addDailyProfit(dailyProfit: DailyProfits)
+
+    suspend fun deleteDailyProfit(date: String)
+
+    fun getDailyProfits():Flow<List<DailyProfits>>
 
 }

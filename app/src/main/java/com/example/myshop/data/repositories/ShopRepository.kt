@@ -1,6 +1,7 @@
 package com.example.myshop.data.repositories
 
 import com.example.myshop.data.ShopDatabaseDao
+import com.example.myshop.model.DailyProfits
 import com.example.myshop.model.Item
 import com.example.myshop.model.SellEntry
 import kotlinx.coroutines.flow.Flow
@@ -25,5 +26,15 @@ class ShopRepository
         return shopDao.addSellEntry(entry)
     }
 
+    override suspend fun addDailyProfit(dailyProfit: DailyProfits) {
+        return shopDao.addDailyProfit(dailyProfit)
+    }
 
+    override suspend fun deleteDailyProfit(date:String) {
+        return shopDao.deleteDailyProfit(date)
+    }
+
+    override fun getDailyProfits():Flow<List<DailyProfits>> {
+        return shopDao.getDailyProfits()
+    }
 }

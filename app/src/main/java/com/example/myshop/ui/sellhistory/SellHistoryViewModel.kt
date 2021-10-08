@@ -16,6 +16,5 @@ class SellHistoryViewModel @ViewModelInject  constructor(
    private val shopRepository: ShopRepository
 ):ViewModel() {
 
-
     fun getSellEntries()= shopRepository.getSellEntries()
 }

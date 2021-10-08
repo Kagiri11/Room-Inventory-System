@@ -61,9 +61,14 @@ class SellFragment : Fragment() {
                 binding.apply {
                     rvCart.adapter = itemAdapter
                     tvCartCount.text = "${list.count()} items"
-                    tvItemCount.text = "${list.sumOf { it.sellingPrice }} /="
                 }
             })
+
+            lifecycleScope.launch {
+                getDailyProfits().collect {
+                    binding.tvItemCount.text = it.size.toString()
+                }
+            }
 
             /**
              * The sell items recyclerview will only be populated by items that match the search pattern
@@ -81,6 +86,7 @@ class SellFragment : Fragment() {
 
         binding.btnSell.setOnClickListener {
             sellViewModel.sellCart()
+            sellViewModel.addDailyProfit()
         }
 
         var search: Job? = null
