@@ -1,4 +1,4 @@
-package com.example.myshop.ui.adapters
+package com.example.myshop.presentation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.databinding.ItemSellBinding
-import com.example.myshop.databinding.ItemSellEntryBinding
-import com.example.myshop.model.Item
+import com.example.myshop.domain.model.Item
 
 class SellItemAdapter : RecyclerView.Adapter<SellItemAdapter.SellItemViewHolder>(){
 

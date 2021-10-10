@@ -1,4 +1,4 @@
-package com.example.myshop.ui.sell
+package com.example.myshop.presentation.ui.sell
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,13 +13,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellBinding
-import com.example.myshop.ui.adapters.CartItemAdapter
-import com.example.myshop.ui.adapters.SellItemAdapter
+import com.example.myshop.presentation.ui.adapters.CartItemAdapter
+import com.example.myshop.presentation.ui.adapters.SellItemAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -34,10 +34,6 @@ class SellFragment : Fragment() {
     @Inject
     lateinit var itemAdapter: CartItemAdapter
     private lateinit var binding: FragmentSellBinding
-
-    @SuppressLint("SimpleDateFormat")
-    val format = SimpleDateFormat("hh:mm dd/M/yyyy")
-    val timeSold = format.format(Calendar.getInstance().time)
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -64,25 +60,32 @@ class SellFragment : Fragment() {
                 binding.apply {
                     rvCart.adapter = itemAdapter
                     tvCartCount.text = "${list.count()} items"
-                    tvItemCount.text = "${list.sumOf { it.sellingPrice }} /="
                 }
             })
+
+            lifecycleScope.launch {
+                getDailyProfits().collect {
+                    binding.tvItemCount.text = it.size.toString()
+                }
+            }
 
             /**
              * The sell items recyclerview will only be populated by items that match the search pattern
              */
-            itemsByName.observe(viewLifecycleOwner, { searchedItems ->
-                sellAdapter.setOnItemClickListener { ite ->
-                    addToCart(ite)
-                }
-                sellAdapter.differ.submitList(searchedItems.toSet().toList())
-                binding.rvSellItems.adapter = sellAdapter
-            })
+//            itemsByName.observe(viewLifecycleOwner, { searchedItems ->
+//                sellAdapter.setOnItemClickListener { ite ->
+//                    addToCart(ite)
+//                }
+//                sellAdapter.differ.submitList(searchedItems.toSet().toList())
+//                binding.rvSellItems.adapter = sellAdapter
+//            })
+
+
         }
 
         binding.btnSell.setOnClickListener {
-            sellViewModel.sellCart(timeSold)
-
+            sellViewModel.sellCart()
+            sellViewModel.addDailyProfit()
         }
 
         var search: Job? = null
@@ -93,7 +96,13 @@ class SellFragment : Fragment() {
                 editable.let {
                     if (editable.toString().isNotEmpty()) {
                         val itemName = "%${editable.toString()}%"
-                        sellViewModel.searchItemByName(itemName)
+                        sellViewModel.getItemsByName(itemName).collect { searchedItems->
+                            sellAdapter.setOnItemClickListener { ite ->
+                                sellViewModel.addToCart(ite)
+                            }
+                            sellAdapter.differ.submitList(searchedItems.take(1))
+                            binding.rvSellItems.adapter = sellAdapter
+                        }
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.myshop.ui.adapters
+package com.example.myshop.presentation.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.databinding.ItemCartBinding
-import com.example.myshop.model.Item
+import com.example.myshop.domain.model.Item
 
 class CartItemAdapter : RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder>(){
 

@@ -1,4 +1,4 @@
-package com.example.myshop.ui.adapters
+package com.example.myshop.presentation.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,19 +9,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshop.R
 import com.example.myshop.databinding.ItemSellEntryBinding
-import com.example.myshop.model.SellEntry
+import com.example.myshop.domain.model.SoldEntry
 
 class SellHistoryAdapter : RecyclerView.Adapter<SellHistoryAdapter.SellHistoryViewHolder>() {
     class SellHistoryViewHolder(val binding: ItemSellEntryBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<SellEntry>() {
+    private val differCallback = object : DiffUtil.ItemCallback<SoldEntry>() {
 
-        override fun areItemsTheSame(oldItem: SellEntry, newItem: SellEntry): Boolean {
+        override fun areItemsTheSame(oldItem: SoldEntry, newItem: SoldEntry): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: SellEntry, newItem: SellEntry): Boolean {
+        override fun areContentsTheSame(oldItem: SoldEntry, newItem: SoldEntry): Boolean {
             return oldItem == newItem
         }
     }

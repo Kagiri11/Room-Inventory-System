@@ -1,4 +1,4 @@
-package com.example.myshop.ui.stock
+package com.example.myshop.presentation.ui.stock
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,8 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentAddStockBinding
-import com.example.myshop.model.Item
-import com.example.myshop.ui.sell.SellViewModel
+import com.example.myshop.domain.model.Item
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

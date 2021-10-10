@@ -1,11 +1,11 @@
 package com.example.myshop.di
 
 import com.example.myshop.data.ShopDatabaseDao
-import com.example.myshop.data.repositories.Repository
-import com.example.myshop.data.repositories.ShopRepository
-import com.example.myshop.ui.adapters.CartItemAdapter
-import com.example.myshop.ui.adapters.SellHistoryAdapter
-import com.example.myshop.ui.adapters.SellItemAdapter
+import com.example.myshop.data.repositories.ShopRepositoryImpl
+import com.example.myshop.domain.repository.ShopRepository
+import com.example.myshop.presentation.ui.adapters.CartItemAdapter
+import com.example.myshop.presentation.ui.adapters.SellHistoryAdapter
+import com.example.myshop.presentation.ui.adapters.SellItemAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,8 +32,8 @@ object AppModule {
     //Repository details
     @Provides
     @Singleton
-    fun provideRepository(dao: ShopDatabaseDao): Repository {
-        return ShopRepository(dao)
+    fun provideRepository(dao: ShopDatabaseDao): ShopRepository {
+        return ShopRepositoryImpl(dao)
     }
 
 }
