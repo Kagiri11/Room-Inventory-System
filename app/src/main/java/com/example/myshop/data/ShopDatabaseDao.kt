@@ -1,12 +1,10 @@
 package com.example.myshop.data
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.myshop.model.DailyProfits
-import com.example.myshop.model.Item
-import com.example.myshop.model.SellEntry
+import com.example.myshop.domain.model.DailyProfits
+import com.example.myshop.domain.model.Item
+import com.example.myshop.domain.model.SoldEntry
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Dao
 interface ShopDatabaseDao {
@@ -24,10 +22,10 @@ interface ShopDatabaseDao {
     fun searchItemsByName(itemName : String):Flow<List<Item>>
 
     @Query("SELECT * FROM sells_table ORDER BY id DESC")
-    fun getSellEntries():Flow<List<SellEntry>>
+    fun getSellEntries():Flow<List<SoldEntry>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addSellEntry(entry:SellEntry)
+    suspend fun addSellEntry(entry:SoldEntry)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addDailyProfit(dailyProfit: DailyProfits)

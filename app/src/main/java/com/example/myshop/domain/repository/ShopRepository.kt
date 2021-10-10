@@ -1,19 +1,19 @@
-package com.example.myshop.data.repositories
+package com.example.myshop.domain.repository
 
-import com.example.myshop.model.DailyProfits
-import com.example.myshop.model.Item
-import com.example.myshop.model.SellEntry
+import com.example.myshop.domain.model.DailyProfits
+import com.example.myshop.domain.model.Item
+import com.example.myshop.domain.model.SoldEntry
 import kotlinx.coroutines.flow.Flow
 
-interface Repository {
+interface ShopRepository {
 
     suspend fun addItem(item : Item)
     suspend fun deleteItem(item:Item)
     suspend fun getItems():List<Item>
 
-    fun getSellEntries():Flow<List<SellEntry>>
+    fun getSellEntries():Flow<List<SoldEntry>>
 
-    suspend fun addEntry(entry: SellEntry)
+    suspend fun addEntry(entry: SoldEntry)
 
     suspend fun searchItemsByName(nameOfItem: String):Flow<List<Item>>
 

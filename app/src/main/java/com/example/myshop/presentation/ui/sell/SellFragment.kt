@@ -1,4 +1,4 @@
-package com.example.myshop.ui.sell
+package com.example.myshop.presentation.ui.sell
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,14 +13,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellBinding
-import com.example.myshop.ui.adapters.CartItemAdapter
-import com.example.myshop.ui.adapters.SellItemAdapter
+import com.example.myshop.presentation.ui.adapters.CartItemAdapter
+import com.example.myshop.presentation.ui.adapters.SellItemAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 

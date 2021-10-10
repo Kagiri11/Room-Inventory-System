@@ -1,15 +1,15 @@
-package com.example.myshop.ui.sell
+package com.example.myshop.presentation.ui.sell
 
 import android.annotation.SuppressLint
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.myshop.data.repositories.Repository
-import com.example.myshop.model.DailyProfits
-import com.example.myshop.model.Item
-import com.example.myshop.model.SellEntry
+import androidx.lifecycle.*
+import com.example.myshop.domain.model.DailyProfits
+import com.example.myshop.domain.model.Item
+import com.example.myshop.domain.model.SoldEntry
+import com.example.myshop.domain.repository.ShopRepository
+import com.example.myshop.domain.use_cases.DeleteStockItemUseCase
+import com.example.myshop.domain.use_cases.GetSellEntriesUseCase
+import com.example.myshop.domain.use_cases.GetStockItemsUseCase
 import com.example.myshop.utils.Cart
 import com.example.myshop.utils.TimeOfSell
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +19,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SellViewModel
-@ViewModelInject constructor(private val shopRepository: Repository) : ViewModel() {
+@ViewModelInject constructor(
+    private val shopRepository: ShopRepository,
+    private val getSellEntries: GetSellEntriesUseCase,
+    private  val getStockItems: GetStockItemsUseCase,
+    private val deleteStockItem: DeleteStockItemUseCase,
+    ) : ViewModel() {
 
     @SuppressLint("SimpleDateFormat")
     val format = SimpleDateFormat("dd/M/yyyy")
@@ -33,7 +38,7 @@ class SellViewModel
 
     private fun prepareDbItems() {
         viewModelScope.launch {
-            dbItems = shopRepository.getItems()
+            dbItems = getStockItems()
         }
     }
 
@@ -51,12 +56,12 @@ class SellViewModel
     }
 
     private fun deleteItem(item: Item) = viewModelScope.launch {
-        shopRepository.deleteItem(item)
+        deleteStockItem.execute(item)
     }
 
     fun sellCart() {
         addEntry(
-            SellEntry(
+            SoldEntry(
                 soldItems = Cart.space.map { it.name },
                 timeSold = TimeOfSell.stamp(),
                 totalProfit = Cart.space.sumOf { it.profit })
@@ -79,17 +84,17 @@ class SellViewModel
         return shopRepository.searchItemsByName(itemName)
     }
 
-    private fun addEntry(entry: SellEntry) {
+    private fun addEntry(entry: SoldEntry) {
         viewModelScope.launch {
             shopRepository.addEntry(entry)
         }
     }
 
-    private fun getSellEntries() = shopRepository.getSellEntries()
+    private fun sellEntries() = getSellEntries()
 
     fun addDailyProfit() {
         viewModelScope.launch {
-            getSellEntries().collect { listOfSoldThings ->
+            sellEntries().collect { listOfSoldThings ->
                 val profit = listOfSoldThings.filter { it.timeSold.contains(dateToday) }
                     .sumOf { it.totalProfit }
                 val dailyProfit = DailyProfits(dateToday, profit)

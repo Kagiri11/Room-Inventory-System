@@ -1,4 +1,4 @@
-package com.example.myshop.ui.sellhistory
+package com.example.myshop.presentation.ui.sellhistory
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myshop.R
 import com.example.myshop.databinding.FragmentSellHistoryBinding
-import com.example.myshop.ui.adapters.SellHistoryAdapter
+import com.example.myshop.presentation.ui.adapters.SellHistoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

@@ -1,16 +1,17 @@
 package com.example.myshop.data.repositories
 
 import com.example.myshop.data.ShopDatabaseDao
-import com.example.myshop.model.DailyProfits
-import com.example.myshop.model.Item
-import com.example.myshop.model.SellEntry
+import com.example.myshop.domain.model.DailyProfits
+import com.example.myshop.domain.model.Item
+import com.example.myshop.domain.model.SoldEntry
+import com.example.myshop.domain.repository.ShopRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ShopRepository 
+class ShopRepositoryImpl
 @Inject constructor(
    private val shopDao: ShopDatabaseDao
-) : Repository {
+) : ShopRepository {
 
     override suspend fun addItem(item: Item)=shopDao.addItem(item)
     override suspend fun deleteItem(item: Item)=shopDao.deleteItem(item)
@@ -18,11 +19,11 @@ class ShopRepository
 
     override suspend fun searchItemsByName(nameOfItem : String) = shopDao.searchItemsByName(nameOfItem)
 
-    override fun getSellEntries(): Flow<List<SellEntry>> {
+    override fun getSellEntries(): Flow<List<SoldEntry>> {
         return shopDao.getSellEntries()
     }
 
-    override suspend fun addEntry(entry: SellEntry) {
+    override suspend fun addEntry(entry: SoldEntry) {
         return shopDao.addSellEntry(entry)
     }
 

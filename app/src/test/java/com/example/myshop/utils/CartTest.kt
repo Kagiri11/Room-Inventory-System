@@ -1,6 +1,6 @@
 package com.example.myshop.utils
 
-import com.example.myshop.model.Item
+import com.example.myshop.domain.model.Item
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
