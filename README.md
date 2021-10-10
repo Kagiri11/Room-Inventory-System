@@ -11,3 +11,5 @@ It is implemented as an offline system as of now.
 5. Dependency Injection with Dagger Hilt
 
 ### Clean Architecture
+<img src= "https://user-images.githubusercontent.com/59829833/136694696-121ee750-cc4e-4d37-9d0b-1b0bf28a9726.jpeg"
+ width = "500" height="400"/>
