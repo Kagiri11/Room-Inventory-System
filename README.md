@@ -11,5 +11,9 @@ It is implemented as an offline system as of now.
 5. Dependency Injection with Dagger Hilt
 
 ### Clean Architecture
+The figure below depicts the moving parts of a clean architecture system
 <img src= "https://user-images.githubusercontent.com/59829833/136694696-121ee750-cc4e-4d37-9d0b-1b0bf28a9726.jpeg"
  width = "500" height="400"/>
++ **Presentation :** This is the layer that bundles the UI related components.
++ **Data :** Whatever source of data our application is going to use will all be abstracted in this layer.
++ **Domain :** This layer maintains the business rules and logic for our application.
