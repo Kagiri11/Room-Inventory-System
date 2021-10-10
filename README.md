@@ -23,3 +23,21 @@ The figure below depicts the moving parts of a clean architecture system
 + Greater decoupling of code which in turn enhances testing and reusability.
 + The project is more understandable even to visitors.
 
+### SOLID Principles
+1. **Single Responsibility Principle (SRP)**
+   Every software artifact should have only one single responsibility - reason to change. 
+   Code that is depended upon by other artifacts should be separated.
+   
+2. **Open-Closed Principle**
+A software artifact should be open for extension but should be closed for modification.
+   
+3. **Liskov Substitution**
+If you have class B which inherits class A, wherever class A is being used, you should be able to use class B without breaking the flow.
+   
+4. **Interface Segregation**
+To prevent a class from implementing methods it does not even need, it is best to many small small interfaces that the class can implement according to its functionality.
+   
+5. **Dependency Inversion**
+Artifacts should depend on abstractions rather than concrete implementations.
+
+
