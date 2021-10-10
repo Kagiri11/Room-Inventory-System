@@ -7,5 +7,7 @@ It is implemented as an offline system as of now.
 1. Room Persistence library - An ORM library used for data persistence
 2. Coroutines & Flow API
 3. MVVM Clean Architecture - A way to structure a project to support scalability and testability
-4. SOLID principles - Design concepts to maintain clean code. 
+4. SOLID principles - Design concepts to maintain clean code.
+5. Dependency Injection with Dagger Hilt
 
+### Clean Architecture
