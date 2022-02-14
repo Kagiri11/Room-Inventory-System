@@ -8,3 +8,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "My Shop"
 include ':app'
+include ':features:stock'
+include ':features:sell'
+include ':domain'
+include ':data:cache'
+include ':repository'
