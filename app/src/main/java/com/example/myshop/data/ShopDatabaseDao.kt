@@ -19,13 +19,13 @@ interface ShopDatabaseDao {
     suspend fun addItem(item: Item)
 
     @Query("SELECT * FROM item_table WHERE name LIKE :itemName")
-    fun searchItemsByName(itemName : String):Flow<List<Item>>
+    fun searchItemsByName(itemName: String): Flow<List<Item>>
 
     @Query("SELECT * FROM sells_table ORDER BY id DESC")
-    fun getSellEntries():Flow<List<SoldEntry>>
+    fun getSellEntries(): Flow<List<SoldEntry>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addSellEntry(entry:SoldEntry)
+    suspend fun addSellEntry(entry: SoldEntry)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addDailyProfit(dailyProfit: DailyProfits)
@@ -34,6 +34,8 @@ interface ShopDatabaseDao {
     suspend fun deleteDailyProfit(date: String)
 
     @Query("SELECT * FROM daily_profits")
-    fun getDailyProfits():Flow<List<DailyProfits>>
+    fun getDailyProfits(): Flow<List<DailyProfits>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveItems(items: List<Item>)
 }
